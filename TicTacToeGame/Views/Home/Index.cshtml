@@ -8,24 +8,59 @@
 
 
 @section scripts
-{
+    {
     <script type="text/javascript">
 
         $(document).ready(async function ()
         {
             drawBoard();
+            // insertGamePiece(0, "cross");
         });
+
+        function insertGamePiece(position, type)
+        {
+            let imageName = type === "cross" ? "cross.png" : "circle.png";
+            let piece = `<img class="${type}Piece" src="images/${imageName}" alt="cross icon" width="100%" />`;
+            $(`#block-${position}`).empty().append(piece)
+        }
+
+        function changeBorder(blockId)
+        {
+            // if already has red border
+            if ($(`#${blockId}`).hasClass('redBorder'))
+            {
+                if (!$(`#${blockId}`).hasClass('border'))
+                {
+                    $(`#${blockId}`).addClass('border')
+                }
+                $(`#${blockId}`).removeClass("redBorder");
+
+            }
+            else
+            {
+                // does not yet have red border
+                // remove red border from any other blocks that have it
+                $(".block").removeClass("redBorder").removeClass("border");
+                $(".block").addClass("border");
+
+                if ($(`#${blockId}`).hasClass('border'))
+                {
+                    $(`#${blockId}`).removeClass("border");
+                }
+                $(`#${blockId}`).addClass("redBorder");
+            }
+        }
 
         function drawBoard()
         {
             let blockArray = [];
-          
+
             for (let i = 0; i < 9; i++)
             {
-                let block = `<div class="col-4 border" id="block-${i}">&nbsp;</div>`;
+                let block = `<div class="col-4 border block blockHeight" id="block-${i}" onClick="changeBorder('block-${i}')">&nbsp;</div>`;
                 blockArray.push(block);
             }
-            
+
             $("#mainBoard").append(blockArray.join(""));
         }
     </script>

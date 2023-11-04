@@ -21,6 +21,14 @@ body {
     height: 80vh;
 }
 
+.blockHeight {
+    height: 33%;
+}
+
+.redBorder {
+    border: 1px solid red;
+}
+
 @media only screen and (max-width: 767px) {
     /* Your CSS for mobile goes here */
     .board-height {
