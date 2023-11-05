@@ -6,7 +6,7 @@
     <div id="options-div" class="col p-2 optionsHeight">
         <h4 class="text-center">Options</h4>
     </div>
-    <div id="mainBoard" class="col-6 border row g-0 board-height"> </div>
+    <div id="mainBoard" class="col-6 row g-0 board-height"> </div>
     <div id="score-div" class="col p-2 score-height">
         <h4 class="text-center">Scoreboard</h4>
     </div>
@@ -36,7 +36,7 @@
             let circle = '<i class="fa-regular fa-circle less-huge-icon" style="color: #ff0000;"></i>';
             let whichIcon = currentPlayer === 1 ? cross : circle;
             let dataValue = currentPlayer === 1 ? "cross" : "circle";
-            
+
             if (isEmpty($(`#${id}`)))
             {
                 $(`#${id}`).append(whichIcon);
@@ -49,7 +49,53 @@
 
         function checkForWinner()
         {
+            let boardArray = [];
 
+            for (let i = 0; i < 9; i++)
+            {
+                let hasDataAttr = $(`#block-${i}`).attr('data-game-piece') !== undefined;
+
+                if (hasDataAttr)
+                {
+                    let contentsOfBlock = $(`#block-${i}`).attr('data-game-piece');
+                    boardArray.push(contentsOfBlock);
+                }
+                else
+                {
+                    boardArray.push(null);
+                }
+            }
+
+            // All possible winning conditions
+            let winningConditionsArray = [
+                [0, 1, 2], // horizontal
+                [3, 4, 5], // horizontal
+                [6, 7, 8], // horizontal
+                [0, 3, 6], // vertical
+                [1, 4, 7], // vertical
+                [2, 5, 8], // vertical
+                [0, 4, 8], // diagonal
+                [2, 4, 6] // diagonal
+            ];
+            
+            // Check board against winning conditions array
+            winningConditionsArray.some((condition, index) =>
+            {
+                if (boardArray[condition[0]] === boardArray[condition[1]] 
+                    && boardArray[condition[1]] === boardArray[condition[2]] 
+                    && boardArray[condition[0]] !== null)
+                {
+                    youWon(boardArray[condition[0]]);
+                    return true;
+                }
+            });
+        }
+
+        function youWon(pieceType)
+        {
+            let type = pieceType === "cross" ? "Crosses" : "Circles";
+            let winningMessage = `<div id="winning-msg" class="text-danger">${type} won!</div>`;
+            $("#mainBoard").prepend(winningMessage)
         }
 
         function changeBorder(blockId)
@@ -84,9 +130,9 @@
             for (let i = 0; i < 9; i++)
             {
                 let block = `<div
-                            class="col-4 border block blockHeight d-flex justify-content-center align-items-center"
-                            id="block-${i}"
-                            onClick="insertGamePiece('block-${i}')"></div>`;
+                                    class="col-4 border block blockHeight d-flex justify-content-center align-items-center"
+                                    id="block-${i}"
+                                    onClick="insertGamePiece('block-${i}')"></div>`;
                 blockArray.push(block);
             }
 
