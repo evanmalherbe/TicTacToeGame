@@ -21,6 +21,14 @@ body {
     height: 80vh;
 }
 
+.options-height {
+    height: 200px;
+}
+
+.scoreHeight {
+    height: 200px;
+}
+
 .blockHeight {
     height: 33%;
 }
@@ -30,8 +38,15 @@ body {
 }
 
 @media only screen and (max-width: 767px) {
-    /* Your CSS for mobile goes here */
     .board-height {
         height: 40vh;
     }
+}
+
+.huge-icon {
+    font-size: 10em;
+}
+
+.less-huge-icon {
+    font-size: 8em;
 }
