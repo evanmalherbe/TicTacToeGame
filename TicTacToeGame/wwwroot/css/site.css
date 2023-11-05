@@ -30,7 +30,7 @@ body {
 }
 
 .blockHeight {
-    height: 33%;
+    height: 33.3%;
 }
 
 .redBorder {
@@ -50,7 +50,7 @@ body {
 .less-huge-icon {
     font-size: 8em;
 }
-
+/*
 .winning-message {
     border: solid 2px black;
     border-radius: 10px;
@@ -63,4 +63,25 @@ body {
     width: 400px;
     height: 200px;
     padding: 10px;
+}*/
+
+.winning-message {
+    border: solid 2px black;
+    border-radius: 10px;
+    background: linear-gradient(to bottom right, #ffffff, #f8f8f8); /* subtle gradient */
+    color: red;
+    position: absolute;
+    font-size: 3rem;
+    top: 50%; /* position adjusted to center the div */
+    left: 50%; /* position adjusted to center the div */
+    transform: translate(-50%, -50%); /* center the div exactly */
+    width: 50vw; /* using viewport width for responsiveness */
+    padding: 20px; /* increased padding */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* subtle shadow */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* text shadow */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0; /* start with 0 opacity */
+    transition: opacity 0.5s ease-in-out; /* smooth transition for the opacity */
 }

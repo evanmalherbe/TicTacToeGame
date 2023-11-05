@@ -3,12 +3,12 @@
 }
 @* d-flex justify-content-center align-items-center *@
 <div class="row g-0">
-    <div id="options-div" class="col-12 col-md p-2 optionsHeight">
+    <div id="options-div" class="col-12 col-md p-2">
         <h4>Options</h4>
         <button class="btn btn-danger" onclick="clearBoard()">Reset</button>
     </div>
     <div id="mainBoard" class="col-12 col-md-6 row g-0 board-height"> </div>
-    <div id="score-div" class="col-12 col-md p-2 score-height">
+    <div id="score-div" class="col-12 col-md p-2">
         <h4 class="text-center">Scoreboard</h4>
     </div>
 </div>
@@ -37,7 +37,6 @@
             {
                 $(`#block-${i}`).empty();
                 $(`#block-${i}`).removeAttr('data-game-piece');
-
             }
             $("#winning-msg").remove();
         }
@@ -107,8 +106,12 @@
         function youWon(pieceType)
         {
             let type = pieceType === "cross" ? "Crosses" : "Circles";
-            let winningMessage = `<div id="winning-msg" class="d-flex justify-content-center align-items-center winning-message">${type} won!</div>`;
-            $("#mainBoard").prepend(winningMessage)
+            let winningMessage = `<div id="winning-msg" class="winning-message">${type} won!</div>`;
+            $("#mainBoard").prepend(winningMessage);
+            setTimeout(() =>
+            {
+                $("#winning-msg").css('opacity', 1); // Fade in the winning message
+            }, 10);
         }
 
         function changeBorder(blockId)
