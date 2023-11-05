@@ -3,11 +3,12 @@
 }
 @* d-flex justify-content-center align-items-center *@
 <div class="row g-0">
-    <div id="options-div" class="col p-2 optionsHeight">
-        <h4 class="text-center">Options</h4>
+    <div id="options-div" class="col-12 col-md p-2 optionsHeight">
+        <h4>Options</h4>
+        <button class="btn btn-danger" onclick="clearBoard()">Reset</button>
     </div>
-    <div id="mainBoard" class="col-6 row g-0 board-height"> </div>
-    <div id="score-div" class="col p-2 score-height">
+    <div id="mainBoard" class="col-12 col-md-6 row g-0 board-height"> </div>
+    <div id="score-div" class="col-12 col-md p-2 score-height">
         <h4 class="text-center">Scoreboard</h4>
     </div>
 </div>
@@ -28,6 +29,15 @@
         {
             // Is element empty (ignore invisible elements such as spaces and line breaks)
             return !$.trim(element.html());
+        }
+
+        function clearBoard()
+        {
+            for (let i = 0; i < 9; i++)
+            {
+                $(`#block-${i}`).empty();
+            }
+            $("#winning-msg").remove();
         }
 
         function insertGamePiece(id)
@@ -51,6 +61,7 @@
         {
             let boardArray = [];
 
+            // Add state of all board positions to array
             for (let i = 0; i < 9; i++)
             {
                 let hasDataAttr = $(`#block-${i}`).attr('data-game-piece') !== undefined;
@@ -94,7 +105,7 @@
         function youWon(pieceType)
         {
             let type = pieceType === "cross" ? "Crosses" : "Circles";
-            let winningMessage = `<div id="winning-msg" class="text-danger">${type} won!</div>`;
+            let winningMessage = `<div id="winning-msg" class="d-flex justify-content-center align-items-center winning-message">${type} won!</div>`;
             $("#mainBoard").prepend(winningMessage)
         }
 

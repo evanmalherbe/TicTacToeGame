@@ -50,3 +50,17 @@ body {
 .less-huge-icon {
     font-size: 8em;
 }
+
+.winning-message {
+    border: solid 2px black;
+    border-radius: 10px;
+    background-color:white;
+    color: red;
+    position: absolute;
+    font-size: 3rem;
+    top: 200px;
+    left: 470px;
+    width: 400px;
+    height: 200px;
+    padding: 10px;
+}
