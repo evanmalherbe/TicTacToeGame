@@ -36,6 +36,8 @@
             for (let i = 0; i < 9; i++)
             {
                 $(`#block-${i}`).empty();
+                $(`#block-${i}`).removeAttr('data-game-piece');
+
             }
             $("#winning-msg").remove();
         }
